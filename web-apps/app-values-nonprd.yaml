@@ -1,8 +1,8 @@
 key:
   components:
-    - givenName: simple-web-app
+    - givenName: simple-web-app-dev
       repoUrl: https://github.com/VasilescuO/simple-web-app.git
-      namespace: web-app
+      namespace: web-app-dev
       clusterName: https://kubernetes.default.svc
       environment: dev
       valuesFile: values-dev.yaml
