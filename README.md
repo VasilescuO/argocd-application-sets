@@ -18,10 +18,14 @@ environments.
 Each team should have a project file to define the scope of their applications. Create a project file for your team, one
 for production and one for non-production environments.
 
-Example path: `argocd-config/projects/ms-team-project-nonprd.yaml`
+Example path: `argocd-config/projects/web-apps-nonprd.yaml`
 
 Projects are created automatically using the `app-of-projects.yaml` file, which uses the app-of-apps pattern to create
 new projects.
+```bash
+kubectl apply -f argocd-config/app-of-projects.yaml
+```
+
 It syncs automatically with github and creates the project in ArgoCD.
 
 ---
@@ -32,7 +36,7 @@ Define the details of your applications for each environment in the `app-values.
 This file contains the configuration for all applications managed by your team.
 There should be one file for non-production and one file for prod
 
-Example path: `teams/ms-team/app-values-nonprod.yaml`
+Example path: `web-apps/app-values-nonprod.yaml`
 
 ---
 
@@ -40,7 +44,7 @@ Example path: `teams/ms-team/app-values-nonprod.yaml`
 
 Define the `ApplicationSet` to dynamically generate applications based on the `app-values.yaml` file.
 
-Example path: `argocd-config/application-sets/ms-team-applicationset-nonprod.yaml`
+Example path: `argocd-config/application-sets/applicationset-nonprod.yaml`
 
 ---
 
@@ -50,7 +54,7 @@ Use `kubectl` to apply the configuration files to your cluster.
 
 ```bash
 # Apply the ApplicationSet
-kubectl apply -f argocd-config/application-sets/ms-team-applicationset.yaml
+kubectl apply -f argocd-config/application-sets/applicationset-nonprod.yaml
 ```
 
 ## Branching Strategy and CODEOWNERS file
