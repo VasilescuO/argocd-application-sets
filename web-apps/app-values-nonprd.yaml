@@ -1,0 +1,10 @@
+key:
+  components:
+    - givenName: simple-web-app
+      repoUrl: https://github.com/VasilescuO/simple-web-app.git
+      namespace: web-app
+      clusterName: https://kubernetes.default.svc
+      environment: dev
+      valuesFile: values-dev.yaml
+      project: web-apps-nonprd
+      targetRevision: main

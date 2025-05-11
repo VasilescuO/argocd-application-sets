@@ -1,0 +1,5 @@
+# Define the owner of the CODEOWNERS file
+/.github @VasilescuO
+
+# Define the owner of the entire repository
+/* @VasilescuO

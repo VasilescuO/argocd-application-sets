@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: web-apps-nonprd
+  labels:
+    environment: nonprod
+spec:
+  description: Used to deploy webapps from non prod env
+  sourceRepos:
+    - 'https://github.com/VasilescuO/*'
+  destinations:
+    - namespace: 'web-app'
+      server: 'https://kubernetes.default.svc'
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'
+  namespaceResourceWhitelist:
+    - group: '*'
+      kind: '*'

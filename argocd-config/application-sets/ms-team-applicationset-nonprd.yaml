@@ -1,0 +1,55 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: ms-team-applications
+  namespace: argocd
+spec:
+  goTemplate: true
+  goTemplateOptions:
+    - missingkey=error
+  generators:
+    - matrix:
+        generators:
+          - git:
+              repoURL: https://github.com/VasilescuO/argocd-application-sets.git
+              revision: main
+              files:
+                - path: web-apps/app-values-nonprd.yaml
+          - list:
+              elements: [ ]
+              elementsYaml: '{{ .key.components | toJson }}'
+  template:
+    metadata:
+      name: "{{.givenName}}-{{.environment}}"
+    spec:
+      destination:
+        namespace: "{{.namespace}}"
+        server: "{{.clusterName}}"
+      source:
+        path: .
+        repoURL: "{{.repoUrl}}"
+        targetRevision: "{{.targetRevision}}"
+        helm:
+          valueFiles:
+            - "{{.valuesFile}}"
+      project: "{{.project}}"
+      syncPolicy:
+        automated:
+          prune: true
+          selfHeal: true
+        syncOptions:
+          - PrunePropagationPolicy=foreground
+          - CreateNamespace=false
+          - ServerSideApply=true
+#      ignoreDifferences:
+#        - group: external-secrets.io
+#          kind: ExternalSecret
+#          jsonPointers:
+#            - /spec/data/0/remoteRef/conversionStrategy
+#            - /spec/data/0/remoteRef/decodingStrategy
+#            - /spec/data/0/remoteRef/metadataPolicy
+#            - /spec/data/1/remoteRef/conversionStrategy
+#            - /spec/data/1/remoteRef/decodingStrategy
+#            - /spec/data/1/remoteRef/metadataPolicy
+#          managedFieldsManagers:
+#            - external-secrets
