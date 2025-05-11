@@ -8,3 +8,11 @@ key:
       valuesFile: values-dev.yaml
       project: web-apps-nonprd
       targetRevision: main
+    - givenName: simple-web-app-pre
+      repoUrl: https://github.com/VasilescuO/simple-web-app.git
+      namespace: web-app-pre
+      clusterName: https://kubernetes.default.svc
+      environment: pre
+      valuesFile: values-pre.yaml
+      project: web-apps-nonprd
+      targetRevision: main
