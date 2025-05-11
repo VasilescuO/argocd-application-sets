@@ -9,7 +9,7 @@ spec:
   sourceRepos:
     - 'https://github.com/VasilescuO/*'
   destinations:
-    - namespace: 'web-app'
+    - namespace: 'web-app-*'
       server: 'https://kubernetes.default.svc'
   clusterResourceWhitelist:
     - group: '*'
